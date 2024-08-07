@@ -58,8 +58,13 @@ function parseRules() {
     }
 
     //If line denotes a section
-    if (key.length < 4 && key.length > 0) {
+    if ((key.length < 4 && key.length > 0) || i === splitRules.length - 1) {
       if (subSections.length !== 0) {
+        currentSubsection.rules = rules;
+        subSections.push(currentSubsection);
+        currentSubsection = {};
+        rules = [];
+        currentRule = {};
         section.subSections = subSections;
         mtgRules.push(section);
         section = {};
