@@ -23,6 +23,15 @@ function parseRules() {
 
   for (let i = 3; i < splitRules.length; i++) {
     let currentRule = {};
+
+    if (i === splitRules.length - 1) {
+      currentSubsection.rules = rules;
+      subSections.push(currentSubsection);
+      section.subSections = subSections;
+      mtgRules.push(section);
+      break;
+    }
+
     if (splitRules[i].length === 0) {
       continue;
     }
@@ -58,7 +67,7 @@ function parseRules() {
     }
 
     //If line denotes a section
-    if ((key.length < 4 && key.length > 0) || i === splitRules.length - 1) {
+    if (key.length < 4 && key.length > 0) {
       if (subSections.length !== 0) {
         currentSubsection.rules = rules;
         subSections.push(currentSubsection);
