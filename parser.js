@@ -48,8 +48,9 @@ function parseRules() {
         currentRule.key = key;
         currentRule.text = text;
       }
-
-      rules.push(currentRule);
+      if (currentRule.key !== undefined && currentRule.text !== undefined) {
+        rules.push(currentRule);
+      }
     }
     //If line denotes a sub-section
     if (key.length === 4) {
@@ -96,7 +97,9 @@ function parseKeywords() {
 
   for (let i = 1; i < splitKeywords.length; i++) {
     if (splitKeywords[i].length === 0) {
-      keywords.push(currentKeyword);
+      if (currentKeyword.key !== "" && currentKeyword.text !== "") {
+        keywords.push(currentKeyword);
+      }
       currentKeyword = { key: "", text: "" };
       newKeyword = true;
       continue;
